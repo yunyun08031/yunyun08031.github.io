@@ -278,21 +278,69 @@
       }
 
       function drawSciFiSkeleton(hand, gx, gy) {
-        stroke(red(mainColor), green(mainColor), blue(mainColor), 80);
         let connections = handPose.getConnections();
+        
+        // 定義每根手指的專屬酷炫螢光色 (R, G, B)
+        const fingerColors = {
+          thumb:  [255, 40, 80],   // 霓虹紅
+          index:  [255, 0, 255],   // 賽博紫
+          middle: [0, 150, 255],   // 全息藍
+          ring:   [0, 255, 200],   // 螢光青
+          pinky:  [150, 255, 0]    // 毒液綠
+        };
+
+        // 判斷點屬於哪根手指
+        function getFingerName(idx) {
+          if (idx >= 1 && idx <= 4) return 'thumb';
+          if (idx >= 5 && idx <= 8) return 'index';
+          if (idx >= 9 && idx <= 12) return 'middle';
+          if (idx >= 13 && idx <= 16) return 'ring';
+          if (idx >= 17 && idx <= 20) return 'pinky';
+          return 'palm';
+        }
+
+        // 畫連線
+        strokeWeight(2);
         for (let i = 0; i < connections.length; i++) {
           let a = connections[i][0], b = connections[i][1];
+          // 如果是一般連接，取末端點的手指顏色；若是掌心連接 (0連接到5,9,13,17)，取該手指的顏色
+          let finger = getFingerName(Math.max(a, b)); 
+          let c = finger !== 'palm' ? fingerColors[finger] : [mainColor.levels[0], mainColor.levels[1], mainColor.levels[2]];
+          
+          stroke(c[0], c[1], c[2], 150);
           line(map(hand.keypoints[a].x, 0, 640, 0, width) + gx, map(hand.keypoints[a].y, 0, 480, 0, height) + gy,
                map(hand.keypoints[b].x, 0, 640, 0, width) + gx, map(hand.keypoints[b].y, 0, 480, 0, height) + gy);
+        }
+
+        // 畫所有關節點（發亮感）
+        for (let i = 0; i < hand.keypoints.length; i++) {
+          let finger = getFingerName(i);
+          let c = finger !== 'palm' ? fingerColors[finger] : [mainColor.levels[0], mainColor.levels[1], mainColor.levels[2]];
+          let x = map(hand.keypoints[i].x, 0, 640, 0, width) + gx;
+          let y = map(hand.keypoints[i].y, 0, 480, 0, height) + gy;
+          
+          // 外暈圈
+          noStroke(); fill(c[0], c[1], c[2], 60); circle(x, y, 10);
+          // 內實心
+          fill(255); circle(x, y, 3);
         }
       }
 
       function drawFingertips(hand, gx, gy) {
+        const fingerColors = { 4: [255, 40, 80], 8: [255, 0, 255], 12: [0, 150, 255], 16: [0, 255, 200], 20: [150, 255, 0] };
         [4, 8, 12, 16, 20].forEach(idx => {
           let k = hand.keypoints[idx];
+          let c = fingerColors[idx];
           let x = map(k.x, 0, 640, 0, width) + gx, y = map(k.y, 0, 480, 0, height) + gy;
-          noFill(); stroke(255, 180); circle(x, y, 12);
-          fill(255, 150); textSize(9); text(`ID:${idx}`, x+15, y-10);
+          
+          // 畫動態雙圈 + 準星
+          noFill(); 
+          stroke(c[0], c[1], c[2], 200); 
+          circle(x, y, 16 + sin(frameCount * 15 + idx) * 4); // 會呼吸的外圈
+          stroke(255, 120); line(x-12, y, x+12, y); line(x, y-12, x, y+12); // 十字準星
+          
+          fill(c[0], c[1], c[2], 200); noStroke(); 
+          textSize(10); text(`SYS.${idx}`, x+18, y-10);
         });
       }
 
