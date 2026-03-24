@@ -10,7 +10,53 @@
     <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
 
     <style>
-      html, body { margin: 0; padding: 0; background-color: #0a0f19; overflow: hidden; font-family: 'Courier New', monospace; }
+      html, body { 
+        margin: 0; padding: 0; overflow: hidden; font-family: 'Courier New', monospace; 
+        background: radial-gradient(circle at center, #0f1c30 0%, #03060a 100%);
+      }
+      
+      /* 酷炫燈光背景 - 固定在最底層 */
+      #cyber-bg {
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        z-index: -1; pointer-events: none;
+      }
+
+      /* 1. 動態霓虹光斑 */
+      .glow-orb {
+        position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6;
+        animation: pulseOrb 8s infinite alternate;
+      }
+      .orb1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: rgba(0, 255, 255, 0.2); animation-delay: 0s; }
+      .orb2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: rgba(255, 0, 255, 0.2); animation-delay: -4s; }
+
+      @keyframes pulseOrb {
+        0% { transform: scale(0.8) translate(0, 0); opacity: 0.3; }
+        100% { transform: scale(1.2) translate(5%, 5%); opacity: 0.7; }
+      }
+
+      /* 2. 科幻網格線 */
+      .grid-bg {
+        position: absolute; top:0; left:0; width:100%; height:100%; opacity: 0.2;
+        background-image: 
+          linear-gradient(rgba(0, 255, 255, 0.3) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 255, 255, 0.3) 1px, transparent 1px);
+        background-size: 50px 50px;
+        transform: perspective(500px) rotateX(60deg) translateY(-100px) scale(3);
+        transform-origin: top;
+        animation: gridMove 20s linear infinite;
+      }
+
+      @keyframes gridMove {
+        0% { background-position: 0 0; }
+        100% { background-position: 0 500px; }
+      }
+
+      /* 3. 掃描線 */
+      .scanlines {
+        position: absolute; top:0; left:0; width:100%; height:100%;
+        background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+        background-size: 100% 4px; z-index: 10; pointer-events: none;
+      }
       
       /* UI 控制群組 */
       .nav-group { position: fixed; top: 20px; left: 20px; z-index: 2000; display: flex; gap: 10px; }
@@ -32,6 +78,14 @@
     </style>
   </head>
   <body>
+    <!-- 酷炫燈光背景 DOM -->
+    <div id="cyber-bg">
+      <div class="glow-orb orb1"></div>
+      <div class="glow-orb orb2"></div>
+      <div class="grid-bg"></div>
+      <div class="scanlines"></div>
+    </div>
+
     <div class="nav-group">
       <a href="../perception_demo.html" id="back-btn" class="nav-btn">HUB</a>
       <div id="reload-btn" class="nav-btn" onclick="location.reload()">RELOAD SYSTEM</div>
@@ -114,7 +168,7 @@
       }
 
       function draw() {
-        background(10, 15, 25);
+        clear(); // 改為透明背景，讓底下的 CSS 特效透上來
         if (!isReady) return;
 
         // 穩定性監控：如果 3 秒內沒有偵測到任何東西（包含偵測空的結果），嘗試重啟偵測
@@ -211,7 +265,13 @@
           if (isInside && !btn.active) {
             btn.active = true;
             playTone(1000);
-            if (btn.label === 'COLOR') { colorIdx = (colorIdx + 1) % colors.length; mainColor = color(colors[colorIdx]); }
+            if (btn.label === 'COLOR') { 
+              colorIdx = (colorIdx + 1) % colors.length; 
+              mainColor = color(colors[colorIdx]); 
+              // 跟隨切換主色時，同步更新背景光斑顏色
+              let c = colors[colorIdx];
+              document.querySelector('.orb1').style.background = `rgba(${red(c)}, ${green(c)}, ${blue(c)}, 0.25)`;
+            }
             else if (btn.label === 'GLITCH') { glitchTimer = 25; playTone(150); }
           } else if (!isInside) { btn.active = false; }
         });
