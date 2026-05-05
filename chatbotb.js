@@ -1057,7 +1057,7 @@ class ChatBot {
         if (recentHistory.length === 0) {
             // If no history, show welcome message
             setTimeout(() => {
-                this.addMessage('你好！我是欒老師的AI課程助手。有任何問題嗎？', 'ai');
+                this.addMessage('你好！我是雲朵的AI課程助手。有任何問題嗎？', 'ai');
             }, 1000);
         }
     }
