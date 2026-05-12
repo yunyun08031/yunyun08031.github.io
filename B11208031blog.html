@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>現代寵物研究報告：連結、科技與身心福祉</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700;800&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pet: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        accent: {
+                            soft: '#fef3c7',
+                            vibrant: '#fbbf24',
+                            warm: '#f59e0b',
+                        },
+                        brand: {
+                            red: '#ef4444'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                        display: ['Outfit', 'Noto Sans TC', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Top Infographic Section -->
+    <header class="relative min-h-screen flex flex-col items-center justify-center pt-12 px-4">
+        <div class="max-w-6xl w-full text-center space-y-8 animate-fade-in-up">
+            <div class="inline-block px-4 py-1.5 mb-4 text-xs font-bold tracking-widest uppercase rounded-full bg-pet-600/20 text-pet-400 border border-pet-500/30">
+                2024 Insight Report
+            </div>
+            <h1 class="text-4xl md:text-7xl font-display font-extrabold tracking-tight leading-tight mb-4">
+                現代寵物<span class="gradient-text">研究報告</span>
+            </h1>
+            <p class="text-lg md:text-2xl text-slate-400 font-light max-w-3xl mx-auto">
+                連結、科技與身心福祉：探索伴侶動物在現代社會的轉型角色
+            </p>
+
+            <div class="mt-12 glass-panel p-2 shadow-2xl overflow-hidden group">
+                <!-- Infographic Media -->
+                <div class="relative rounded-2xl overflow-hidden aspect-video bg-slate-800">
+                    <video src='https://opal.google/board/blobs/60879607-1c29-454b-981a-be79c0e738ba' alt='media_1' class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                        <p class="text-sm text-slate-200">
+                            這是一張根據報告摘要製作的 16:9 高解析度資訊圖表，涵蓋了身心健康益處、醫療科技革新、寵物擬人化趨勢以及「一體健康」公共衛生觀念。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Background Elements -->
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-pet-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+    </header>
+
+    <!-- Middle Short Video Section -->
+    <section class="py-24 px-4 bg-slate-900/50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl font-display font-bold text-slate-300 mb-12 flex items-center justify-center gap-3">
+                <span class="w-12 h-[2px] bg-pet-500"></span>
+                趨勢短影音
+                <span class="w-12 h-[2px] bg-pet-500"></span>
+            </h2>
+            <div class="glass-panel p-4 animate-float">
+                <div class="rounded-xl overflow-hidden shadow-lg border border-white/5">
+                    <img src='https://opal.google/board/blobs/bcbf36c2-15b5-41f5-a402-a0b7a92c4c48' alt='media_2' class="w-full h-auto object-cover" />
+                </div>
+                <p class="mt-6 text-slate-400 italic text-sm">
+                    即時觀察：科技賦能如何重塑我們與毛孩的日常生活
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Report Section -->
+    <main class="py-24 px-4 max-w-5xl mx-auto space-y-24">
+        
+        <!-- Abstract / Bento Grid -->
+        <section>
+            <h2 class="text-3xl font-display font-bold mb-10 border-l-4 border-pet-500 pl-6">報告摘要</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-panel p-8 hover:bg-white/[0.05] transition-colors duration-300">
+                    <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 text-blue-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-100">身心健康益處</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">現代研究證實，人與動物的互動能顯著降低壓力荷爾蒙，並在後疫情時代有效緩解社交孤立，甚至能減緩老年人的認知功能退化。</p>
+                </div>
+                <div class="glass-panel p-8 hover:bg-white/[0.05] transition-colors duration-300">
+                    <div class="w-10 h-10 bg-pet-500/20 rounded-lg flex items-center justify-center mb-4 text-pet-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 21h6l-.75-4M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-100">醫療科技革新</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">人工智慧（AI）與物聯網（IoT）正改變獸醫診斷模式，從傳統的「病後治療」轉向「精準醫療」與「主動預防」。</p>
+                </div>
+                <div class="glass-panel p-8 hover:bg-white/[0.05] transition-colors duration-300">
+                    <div class="w-10 h-10 bg-accent-warm/20 rounded-lg flex items-center justify-center mb-4 text-accent-warm">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-100">消費擬人化趨勢</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">寵物被視為家庭成員的「擬人化」趨勢帶動了高端營養品、生鮮飲食及環境友善產品的爆發式成長。</p>
+                </div>
+                <div class="glass-panel p-8 hover:bg-white/[0.05] transition-colors duration-300">
+                    <div class="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-4 text-emerald-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-100">公共衛生共榮</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">「一體健康」概念強調人類、動物與環境衛生的緊密關聯，成為預防新興人畜共通傳染病的關鍵策略。</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Main Body -->
+        <article class="space-y-16 text-slate-300 leading-relaxed text-lg">
+            
+            <div class="space-y-6">
+                <h3 class="text-2xl font-display font-bold text-pet-300">一、 人與動物連結的情感與生物學效應</h3>
+                <p>
+                    根據 2024 年最新的文獻回顧，<strong class="text-white">人與動物連結</strong>（Human-Animal Bond）對人類福祉有著深刻的生物學影響。研究發現，與寵物互動能顯著降低體內的<strong class="text-white">皮質醇</strong>（Cortisol，一種壓力荷爾蒙），並促進<strong class="text-white">催產素</strong>（Oxytocin，又稱親密荷爾蒙或幸福荷爾蒙）的釋放。
+                </p>
+                <p>
+                    此外，針對<strong class="text-white">神經多樣性</strong>（Neurodiversity）族群（如自閉症患者）的研究顯示，寵物能提供非評判性的情緒支持，協助其調節社交壓力。對於高齡族群而言，長期的寵物所有權（Pet Ownership）與較緩慢的<strong class="text-white">認知功能退化</strong>（Cognitive Decline）及較低的<strong class="text-white">衰弱症</strong>（Frailty）風險呈現正相關，這主要歸功於寵物維持了飼主的日常體能活動與社區社交參與。
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <h3 class="text-2xl font-display font-bold text-pet-300">二、 科技賦能與獸醫學的轉型</h3>
+                <p>
+                    在醫療進展方面，<strong class="text-white">人工智慧</strong>（Artificial Intelligence, AI）正引領一場變革。2023 年至 2024 年的研究指出，AI 在獸醫學影像辨識中的準確度已能輔助早期診斷複雜疾病，如癌症或心血管異常。這結合了<strong class="text-white">精準醫療</strong>（Precision Medicine）的概念，能根據個別樣本的生理參數設定診療計畫。
+                </p>
+                <p>
+                    與此同時，<strong class="text-white">物聯網</strong>（Internet of Things, IoT）技術被廣泛應用於穿戴式裝置。智慧項圈能即時監控寵物的呼吸、心率及睡眠品質。這種「主動預防」的模式，讓飼主能在疾病徵兆不明顯時即介入治療，大幅提升了伴侶動物的生活品質。
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <h3 class="text-2xl font-display font-bold text-pet-300">三、 全球市場趨勢：寵物的擬人化</h3>
+                <p>
+                    隨社經結構改變，<strong class="text-white">寵物擬人化</strong>（Humanization of Pets）已成為全球寵物市場的核心引擎。飼主不再僅將動物視為看護或玩具，而是將其視為不可或缺的家庭成員。這一轉變帶動了對高品質、客製化糧食的需求，如<strong class="text-white">生鮮寵物食品</strong>（Fresh Pet Food）與具有環保價值的<strong class="text-white">可持續性</strong>（Sustainability）包裝。
+                </p>
+                <p>
+                    此外，市場也開始關注寵物的精細化需求，包括抗焦慮產品、心理健康音樂以及專門的物理治療器材，顯示消費重心正由基礎生存需求轉向生理與心理的全面照護。
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <h3 class="text-2xl font-display font-bold text-pet-300">四、 一體健康與傳染病防治</h3>
+                <p>
+                    在全球氣候變遷與頻繁跨國流動的背景下，<strong class="text-white">一體健康</strong>（One Health）概念變得至關重要。這項概念主張人類健康、動物健康與環境健康是不可分割的。最新的學術評述強調，隨著病媒蚊蟲分布的擴展，<strong class="text-white">人畜共通傳染病</strong>（Zoonoses）的風險正在上升。透過加強伴侶動物的防疫管理、定期除蟲與環境監控，不僅是保護寵物，更是建構人類公共衛生安全網的第一線。
+                </p>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="p-10 glass-panel border-pet-500/30 bg-pet-500/5">
+                <h3 class="text-2xl font-display font-bold text-white mb-4">結論</h3>
+                <p class="text-slate-300 leading-relaxed">
+                    綜合近年研究，寵物在現代社會的角色已從單純的伴侶升格為促進人類身心健康的關鍵力量。科技的介入如 AI 與 IoT 使得寵物健康管理更趨精準，而擬人化的消費趨勢反映了深刻的社會情感連結。未來，落實「一體健康」的跨學科合作，將是提升人寵共同生活品質、防範全球性公共衛生風險的核心方向。
+                </p>
+            </div>
+        </article>
+
+        <!-- References -->
+        <section class="pt-12 pb-24">
+            <h3 class="text-lg font-bold text-slate-400 mb-6 uppercase tracking-widest">引用文獻來源</h3>
+            <ol class="space-y-4 text-sm text-slate-500 list-decimal pl-5">
+                <li>Gee, N. R., Rodriguez, K. E., Fine, A. H., & Trammell, J. P. (2024). <em>The Human–Animal Bond and Its Impact on Human Wellbeing: A Review of Current Literature</em>.</li>
+                <li>Banzato, T., Cherubini, G. B., et al. (2023). <em>Artificial Intelligence in Veterinary Medicine: A Review of Current Applications and Future Perspectives</em>.</li>
+                <li>Friedmann, E., & Gee, N. R. (2023). <em>Pet Ownership and Cognitive Decline Among Older Adults: A Systematic Review and Meta-Analysis</em>.</li>
+                <li>Statista Research Department (2024). <em>The Humanization of Pets: Global Trends in the Pet Tech and Nutrition Industry</em>.</li>
+                <li>Dantas-Torres, F. (2024). <em>One Health Perspectives on Companion Animal Zoonoses: Emerging Challenges and Solutions</em>.</li>
+            </ol>
+        </section>
+    </main>
+
+    <!-- Centered Footer -->
+    <div class="w-full py-16 bg-slate-950/80 border-t border-white/5 flex flex-col items-center justify-center space-y-4">
+        <p class="text-slate-400 font-medium">
+            【主題探索報告】by <span class="text-brand-red italic ml-1">Famidoc Chang</span>
+        </p>
+        <div class="flex gap-4">
+            <div class="w-2 h-2 rounded-full bg-pet-500"></div>
+            <div class="w-2 h-2 rounded-full bg-pet-600"></div>
+            <div class="w-2 h-2 rounded-full bg-pet-700"></div>
+        </div>
+    </div>
+
+    <script>
+        // Simple Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    entry.target.style.opacity = 1;
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section, article > div, .glass-panel').forEach((el) => {
+            el.style.opacity = 0;
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
