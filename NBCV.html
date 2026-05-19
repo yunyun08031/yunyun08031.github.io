@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大學生海外文化與歷史研究資源網</title>
+    <style>
+        /* CSS 變數與基礎重設 */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e67e22;
+            --background-color: #f8f9fa;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --light-gray: #e9ecef;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* 導覽列與折疊式選單 */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+            transition: var(--transition);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .nav-menu li a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* 響應式中斷點 (手機板折疊選單) */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                padding: 1rem 0;
+                box-shadow: 0 4px 5px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+        }
+
+        /* 主畫面佈局 */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+        }
+
+        .hero-section h1 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        /* 搜尋框樣式 */
+        .search-container {
+            max-width: 600px;
+            margin: 1.5rem auto 0 auto;
+            display: flex;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid transparent;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            border-color: var(--secondary-color);
+        }
+
+        /* 區塊標題 */
+        .section-title {
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+            display: inline-block;
+            color: var(--primary-color);
+        }
+
+        /* 資源庫卡片格線 */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            border-top: 5px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .card-tag {
+            display: inline-block;
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+            padding: 0.2rem 0.6rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 20px;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: #666;
+            text-align: justify;
+        }
+
+        /* FAQ 折疊式選單 (Accordion) */
+        .faq-container {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            outline: none;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '−';
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1rem;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1rem 1rem 1rem;
+        }
+
+        /* 查無結果提示 */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-size: 1.1rem;
+            background: #fff;
+            border-radius: var(--border-radius);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav-container">
+            <a href="#" class="logo">HOOK全球文化研究庫</a>
+            <button class="menu-toggle" id="mobile-menu" aria-label="切換選單">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="nav-list">
+                <li><a href="#">首頁</a></li>
+                <li><a href="#resources">歷史與資源庫</a></li>
+                <li><a href="#faq">常見問答 FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h1>大學生海外生活物價與世界歷史學習網</h1>
+            <p></p>探索由文獻資料庫提煉的各國物價對比、監獄飲食、大航海歷史與傳統文化研究</p>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="輸入關鍵字搜尋資源與FAQ（例如：英國、荷蘭、歷史、物價）...">
+            </div>
+        </section>
+
+        <section id="resources">
+            <h2 class="section-title">主題研究資源庫</h2>
+            <div class="resource-grid" id="resourceGrid">
+                <div class="card" data-keywords="英國 物價 倫敦 留學 生活 舒暢 飲食">
+                    <span class="card-tag">海外物價研究</span>
+                    <h3 class="card-title">英國非倫敦地區生活與物價評估</h3>
+                    <p class="card-desc">根據實地文獻考察，離開首都倫敦後的英國非首都地區，整體物價相對低廉許多。雖然當地的日常餐點及特定傳統食物（如部分麵包與傳統烹飪）經常被研究者調侃，但其居住舒適度與整體生活性價比皆高，非常適合作為大學生海外移地訓練與留學生活之參考基礎。</p>
+                </div>
+
+                <div class="card" data-keywords="荷蘭 資優生 大O 紅燈區 思考 社會體制">
+                    <span class="card-tag">歐洲社會考察</span>
+                    <h3 class="card-title">荷蘭多元社會與教育體制剖析</h3>
+                    <p class="card-desc">文獻指出荷蘭在國際學生眼中如同「班上既會玩又會讀書的資優生」。除了廣為人知的大O文化與紅燈區等前衛開放政策外，其真實社會結構充滿獨特且正向的制度邏輯，值得大專院校學生針對其公共政策與多元文化包容度進行深入專題思辨。</p>
+                </div>
+
+                <div class="card" data-keywords="甘比亞 史 世界史 吟遊詩人 職業 部落 歷史">
+                    <span class="card-tag">世界歷史專題</span>
+                    <h3 class="card-title">西非甘比亞歷史與傳統職業演進</h3>
+                    <p class="card-desc">探討西非甘比亞的歷史脈絡，並特別考證「吟遊詩人」在該國傳統社會中是否為真實存在的全職職業。文獻更進一步解析甘比亞在面臨多元部落文化與伊斯蘭教等不同信仰衝擊時，各個群體之間如何維持和諧共處與獨特的社會包容力。</p>
+                </div>
+
+                <div class="card" data-keywords="巴菲特 三餐 飲食法 六歲小孩 投資心理 快樂冠軍">
+                    <span class="card-tag">生活哲學與名人</span>
+                    <h3 class="card-title">巴菲特「六歲小孩飲食法」之哲學探討</h3>
+                    <p class="card-desc">研究傳奇投資家巴菲特的神秘日常飲食習慣。他宣稱人生中最快樂的年紀是六歲，因此一生堅持只食用六歲小孩喜愛的速食與飲品。此一特殊文獻記錄提供了大學生在探討名人生活型態、投資心理學與個人快樂定義時一個有趣的跨領域研究案例。</p>
+                </div>
+
+                <div class="card" data-keywords="監獄 料理史 料理史王 歷史 飲食 社會階級 刑罰">
+                    <span class="card-tag">生活史專題</span>
+                    <h3 class="card-title">歷史上囚犯與監獄三餐之社會學分析</h3>
+                    <p class="card-desc">透過「料理史王」文獻庫，嚴謹考證古代與近現代特定監獄中罪犯的飲食規範。研究發現部分特定監獄甚至曾出現過餐餐供應六道菜餚的驚人紀錄，打破大眾對於歷史刑罰環境的刻板印象，是研究生活史與社會階級變遷的重要素材。</p>
+                </div>
+
+                <div class="card" data-keywords="運動 體能 挑戰 身體極限 運動科學 效率">
+                    <span class="card-tag">身體與運動科學</span>
+                    <h3 class="card-title">極限體能消耗與三年運動量一日壓縮實測</h3>
+                    <p class="card-desc">探討高強度體能消耗對人體結構的即時衝擊，文獻記錄了試圖在單一天數內完成高達三年份總運動量的極限實驗。該文本為運動科學、核心肌群訓練與疲勞恢復等大專體育與健康通識課題提供了寶貴的經驗數據與反思。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2 class="section-title">常見問答 FAQ</h2>
+            <div class="faq-container">
+                <div class="faq-item" data-keywords="英國 倫敦 物價 食物 生活 舒適">
+                    <button class="faq-question">離開倫敦後，英國其他地區的真實物價與居住感受如何？</button>
+                    <div class="faq-answer">
+                        <p>文獻顯示，英國倫敦以外的地區物價相對低廉許多，整體居住體驗非常舒服。然而，文獻中也特別指出當地的「食物」通常不符合多數亞洲研究者的胃口，在麵包等主食上甚至有吃到讓人感到疲憊的文字紀錄，建議前往該地交流的大學生需做好飲食習慣調整的準備。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="荷蘭 開放 大O 紅燈區 標籤 刻板印象">
+                    <button class="faq-question">我們應該如何用正確的角度看待荷蘭的文化？</button>
+                    <div class="faq-answer">
+                        <p>根據歷史社會考察資料，荷蘭常被誤認為只有大O與紅燈區等特殊娛樂產業。但事實上，它在教育與思維上表現極為優異，就像是班上「會玩又會讀書的資優生」。其實際社會風氣雖然怪異（以一種非常正向、創新的方式呈現），但在治安維護與晚上步行的安全性上皆具備極高的科學制度保障。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="巴菲特 飲食 快樂 投資 名人 養生">
+                    <button class="faq-question">巴菲特的神秘飲食法的核心邏輯是什麼？</button>
+                    <div class="faq-answer">
+                        <p>巴菲特的飲食習慣建立在「心理快樂」的基礎上。他認為全人類最快樂的年紀是落在「六歲」，因此他一生都傾向只吃六歲小孩會吃的東西（如速食、特定甜食與碳酸飲料）。這證明了在名人研究中，個人心理健康的愉悅度有時會被視為維持長期工作活力的核心關鍵。</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="甘比亞 部落 衝突 宗教 伊斯蘭教 基督徒 包容">
+                    <button class="faq-question">甘比亞在多元部落與多種宗教信仰共存下，社會如何維持穩定？</button>
+                    <div class="faq-answer">
+                        <p>文獻詳細記錄，甘比亞是一個具備極高包容力的國家。雖然境內大部分人民信仰伊斯蘭教，且存在眾多不同的傳統部落，但當面對聖誕節、開齋節或其他重大傳統宗教節日時，所有部落與教派皆會共同慶祝、互相融合，展現出高度的社會融合性，是族群關係研究的優良典範。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 大學生活網 - 全球文化與歷史專題資源庫 (嚴謹基於 NotebookLM 唯一知識庫)</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 1. 漢堡選單 (折疊式選單控制)
+            const mobileMenuBtn = document.getElementById('mobile-menu');
+            const navList = document.getElementById('nav-list');
+
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation(); // 防止冒泡引發其他事件
+                navList.classList.toggle('active');
+            });
+
+            // 點擊選單連結後自動關閉選單 (手機板優化)
+            const navLinks = document.querySelectorAll('.nav-menu li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navList.classList.remove('active');
+                });
+            });
+
+            // 點擊網頁其他地方自動收起選單
+            document.addEventListener('click', function(e) {
+                if (!mobileMenuBtn.contains(e.target) && !navList.contains(e.target)) {
+                    navList.classList.remove('active');
+                }
+            });
+
+
+            // 2. FAQ 折疊式選單 (Accordion 原生動態高度動畫)
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const item = this.parentElement;
+                    const answer = this.nextElementSibling;
+
+                    // 檢查當前點擊的 FAQ 是否已經開啟
+                    const isOpen = item.classList.contains('active');
+
+                    // 先關閉所有其他的 FAQ (單一展開模式)
+                    document.querySelectorAll('.faq-item').forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+
+                    // 如果原本是關閉的，則將其開啟，並透過 scrollHeight 動態計算 CSS 高度
+                    if (!isOpen) {
+                        item.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    } else {
+                        item.classList.remove('active');
+                        answer.style.maxHeight = null;
+                    }
+                });
+            });
+
+
+            // 3. 即時搜尋框功能 (整合資源庫卡片與 FAQ 區塊)
+            const searchInput = document.getElementById('searchInput');
+            const cards = document.querySelectorAll('.card');
+            const faqItems = document.querySelectorAll('.faq-item');
+            const resourceGrid = document.getElementById('resourceGrid');
+
+            // 建立查無結果的 DOM 元素
+            const noResultsMessage = document.createElement('div');
+            noResultsMessage.className = 'no-results';
+            noResultsMessage.innerText = '沒有找到符合關鍵字的資源，請嘗試搜尋其他詞彙（如：物價、歷史、甘比亞）。';
+            noResultsMessage.style.display = 'none';
+            resourceGrid.appendChild(noResultsMessage);
+
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim().toLowerCase();
+                let visibleCardsCount = 0;
+
+                // A. 篩選資源卡片
+                cards.forEach(card => {
+                    const keywords = card.getAttribute('data-keywords').toLowerCase();
+                    const title = card.querySelector('.card-title').innerText.toLowerCase();
+                    const desc = card.querySelector('.card-desc').innerText.toLowerCase();
+
+                    if (keywords.includes(query) || title.includes(query) || desc.includes(query)) {
+                        card.style.display = 'block';
+                        visibleCardsCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // 控制「查無結果」提示的顯示與否
+                if (visibleCardsCount === 0 && query !== '') {
+                    noResultsMessage.style.display = 'block';
+                } else {
+                    noResultsMessage.style.display = 'none';
+                }
+
+                // B. 篩選 FAQ 項目
+                faqItems.forEach(item => {
+                    const keywords = item.getAttribute('data-keywords').toLowerCase();
+                    const question = item.querySelector('.faq-question').innerText.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').innerText.toLowerCase();
+
+                    if (keywords.includes(query) || question.includes(query) || answer.includes(query)) {
+                        item.style.display = 'block';
+                        // 如果在搜尋狀態下，可以保持原樣，或自動展開符合的項目 (此處選擇保持結構，可點擊查看)
+                    } else {
+                        item.style.display = 'none';
+                        // 隱藏時順便將其收合
+                        item.classList.remove('active');
+                        item.querySelector('.faq-answer').style.maxHeight = null;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
